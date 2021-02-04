@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<ul class="list-group list-group-flush">
+{% for phrase in phrases %}
+
+
+    <li class="list-group-item">{% if phrase.wiki_url %}
+        {% if phrase.wiki_dis %}
+           <a href={{phrase.wiki_url}} target="_blank"><span class="badge rounded-pill bg-danger">{{ phrase.phrase }} (Disambiguation)</span></a>
+            {% else %}  
+            <a href={{phrase.wiki_url}} target="_blank"><span class="badge rounded-pill bg-primary">{{ phrase.phrase }} ({{phrase.wiki_title}})</span></a>
+            {% endif %}
+         {% else %}   
+    
+         <span class="badge rounded-pill bg-light text-dark">{{ phrase.phrase }}</span>
+        {% endif %} <small class="text-muted">{{phrase.q_count}}</small>
+        </li>
+
+
+
+
+
+{% endfor %}
+</ul>
+{% endblock %}

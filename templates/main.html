@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Uploader</th>
+        <th scope="col">Keyphrases</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for doc in obj %}
+      <tr>
+        <td>
+            <a href="{% url 'detail'  doc.pk %}">
+            {{doc.description}}
+        </a></th>
+        <td>{% if doc.uploader %}
+            <a href="{% url 'by_uploader'  doc.uploader %}">{{doc.uploader}}</a>
+            {% else %}
+            Anonymous
+            {% endif %}
+        </td>
+        <td>{% for cat in doc.keyphrases.all %}
+            {% if cat.wiki_url %}
+            {% if cat.wiki_dis %}
+               <a href={{cat.wiki_url}} target="_blank"><span class="badge rounded-pill bg-danger">{{ cat.phrase }} (Disambiguation)</span></a>
+                {% else %}  
+                <a href={{cat.wiki_url}} target="_blank"><span class="badge rounded-pill bg-primary">{{ cat.phrase }} ({{cat.wiki_title}})</span></a>
+                {% endif %}
+             {% else %}   
+
+             <span class="badge rounded-pill bg-light text-dark">{{ cat.phrase }}</span>
+            {% endif %}
+            
+                
+
+            {% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

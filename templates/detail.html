@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<p>Uploader : 
+    {% if doc.uploader %}
+                <a href="{% url 'by_uploader'  doc.uploader %}">{{doc.uploader}}</a>
+                {% else %}
+                Anonymous
+                {% endif %}</p>
+
+<p>Keyphrases :
+    {% for cat in doc.keyphrases.all %}
+    {% if cat.wiki_url %}
+    {% if cat.wiki_dis %}
+       <a href={{cat.wiki_url}} target="_blank"><span class="badge rounded-pill bg-danger">{{ cat.phrase }} (Disambiguation)</span></a>
+        {% else %}  
+        <a href={{cat.wiki_url}} target="_blank"><span class="badge rounded-pill bg-primary">{{ cat.phrase }} ({{cat.wiki_title}})</span></a>
+        {% endif %}
+     {% else %}   
+
+     <span class="badge rounded-pill bg-light text-dark">{{ cat.phrase }}</span>
+    {% endif %}
+    
+        
+
+    {% endfor %}  </p>
+          
+<div>Text :
+    <p>{{doc.text}}</p>
+
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Text</label>
+        <textarea class="form-control"  rows="30" name="text" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" name="desc" >
+        <div  class="form-text">Small description for later use. Default : 140 first characters of text</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Uploader</label>
+        <input type="text" class="form-control" name="uploader">
+        <div  class="form-text">Uploader name or email for later use. Default : Anonymous</div>
+      </div>
+    
+    <input class="btn btn-primary" type="submit" >
+</form>
+
+
+{% endblock %}
